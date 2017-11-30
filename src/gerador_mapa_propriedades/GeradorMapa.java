@@ -26,7 +26,10 @@ public class GeradorMapa {
 	}
 
 	private static boolean isGetter(Method m) {
-		return m.getName().startsWith("get") && m.getReturnType() != void.class && m.getParameterTypes().length == 0;
+		return m.getName().startsWith("get") 
+				&& m.getReturnType() != void.class 
+				&& m.getParameterTypes().length == 0 
+				&& !m.getName().startsWith("getClass");
 	}
 
 	private static String deGetterParaPropriedade(String nomeGetter) {
@@ -36,11 +39,4 @@ public class GeradorMapa {
 		return retorno.toString();
 	}
 
-	public static void main(String[] args) {
-		Pessoa p = new Pessoa("Jonatas", "Luis", 24);
-		Map<String, Object> props = GeradorMapa.gerarMapa(p);
-		for (String prop : props.keySet()) {
-			System.out.println(prop + " = " + props.get(prop));
-		}
-	}
 }
